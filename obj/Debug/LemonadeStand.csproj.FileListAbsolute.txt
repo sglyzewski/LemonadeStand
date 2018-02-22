@@ -1,0 +1,7 @@
+\\Mac\Home\Desktop\Dev_Code_Camp\Day_24\LemonadeStand\LemonadeStand\bin\Debug\LemonadeStand.exe.config
+\\Mac\Home\Desktop\Dev_Code_Camp\Day_24\LemonadeStand\LemonadeStand\bin\Debug\LemonadeStand.exe
+\\Mac\Home\Desktop\Dev_Code_Camp\Day_24\LemonadeStand\LemonadeStand\bin\Debug\LemonadeStand.pdb
+\\Mac\Home\Desktop\Dev_Code_Camp\Day_24\LemonadeStand\LemonadeStand\obj\Debug\LemonadeStand.csprojResolveAssemblyReference.cache
+\\Mac\Home\Desktop\Dev_Code_Camp\Day_24\LemonadeStand\LemonadeStand\obj\Debug\LemonadeStand.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\Dev_Code_Camp\Day_24\LemonadeStand\LemonadeStand\obj\Debug\LemonadeStand.exe
+\\Mac\Home\Desktop\Dev_Code_Camp\Day_24\LemonadeStand\LemonadeStand\obj\Debug\LemonadeStand.pdb
