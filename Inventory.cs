@@ -8,5 +8,13 @@ namespace LemonadeStand
 {
     class Inventory
     {
+        //member variables
+        int currentStock;
+        List<float> prices;
+        
+        
+        //constructor
+        //member methods
+
     }
 }

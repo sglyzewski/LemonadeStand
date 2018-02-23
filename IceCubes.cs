@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Weather
+    class IceCubes: Inventory
     {
+
         //member variables
         //constructor
         //member methods

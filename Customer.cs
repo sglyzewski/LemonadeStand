@@ -8,5 +8,9 @@ namespace LemonadeStand
 {
     class Customer
     {
+        //member variables
+        int oddsOfPurchasing;
+        //constructor
+        //member methods
     }
 }
