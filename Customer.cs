@@ -25,8 +25,7 @@ namespace LemonadeStand
         //member methods
         public void GetOdds()
         {
-
-            oddsOfPurchasing = random.Next(0, weatherFactorNumber);
+            oddsOfPurchasing = random.Next(1, weatherFactorNumber);
         }
 
         public void GetWeatherFactorNumber()
@@ -52,13 +51,19 @@ namespace LemonadeStand
             {
                weatherFactorNumber = 6;
             }
-
              
         }
 
         public void Purchase(int cupsSold)
         {
-            if(purchase == true)
+            GetWeatherFactorNumber();
+            GetOdds();
+            if (oddsOfPurchasing == 1)
+            {
+                purchase = true;
+            }
+
+            if (purchase == true)
             {
                 cupsSold++;
             }

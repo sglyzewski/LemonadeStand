@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    abstract class Inventory
+    class Inventory
+    
     {
         //member variables
        public int currentStock;
        public int spoilNumber;
-
-
+    
 
         //constructor
         //member methods
-        public abstract bool Spoiler(int spoilNumber);
+        public virtual bool Spoiler(int spoilNumber)
+        {
+            return true;
+        }
+        
+        
         
 
     }

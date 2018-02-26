@@ -71,15 +71,32 @@ namespace LemonadeStand
 
         public void DecreaseInventory()
         {
-            for (int i = 1; i <= cupsSold; i++)
+
+            for (int i = 1; i <= cupsSold || (CheckForSoldOut() == true); i++)
             {
                 cups.currentStock --;
-                iceCubes.currentStock = iceCubes.currentStock - iceCubesPerGlass;  
+                iceCubes.currentStock = iceCubes.currentStock - iceCubesPerGlass;
+                if (i % pitcherLooper ==0)
+                {
+                    lemons.currentStock = lemons.currentStock - lemonsPerPitcher;
+                    sugar.currentStock = sugar.currentStock - cupsSugarPerPitcher;
+                }
             }
 
 
         }
 
+        public bool CheckForSoldOut()
+        {
+            if ((iceCubes.currentStock) < 1 || (lemons.currentStock < 1) || (sugar.currentStock < 1) || (cups.currentStock < 0))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public void DeterminePotentialCustomers()
         {
@@ -92,13 +109,22 @@ namespace LemonadeStand
                 potentialCustomers = 60;
             }
         }
-
+        public void DetermineCupsSold()
+        {
+            for(int i = 0; i<potentialCustomers; i++)
+            {
+                Customer customer = new Customer();
+                customer.Purchase(cupsSold);
+            }
+        }
         public void RunDay()
         {
             weather.DetermineForecast();
             DeterminePotentialCustomers();
             DetermineGlassesPerPitcher();
             DecreaseInventory();
+            GetPopularity();
+            
 
 
         }

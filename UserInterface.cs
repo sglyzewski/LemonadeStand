@@ -16,6 +16,7 @@ namespace LemonadeStand
         Sugar sugar;
         IceCubes iceCubes;
         Cups cups;
+       
         //constructor
 
         public UserInterface()
@@ -26,6 +27,7 @@ namespace LemonadeStand
             sugar = new Sugar();
             iceCubes = new IceCubes();
             cups = new Cups();
+            
         }
         //member methods
 
@@ -64,10 +66,10 @@ namespace LemonadeStand
             for (int i = 0; i < price.Count; i++)
             {
 
-                GiveMessage(amount[i] + " for $" + price[i]);
+                GiveMessage("OPTION " + (i + 1) + ": " + amount[i] + " for $" + price[i]);
             }
 
-            string input = GetStringInput("How many " + item + " would you like to purchase?");
+            string input = GetStringInput("Type '1' for Option 1, '2' for Option 2, '3' for Option 3 or '0' to buy none.");
             
             return input;
         }
@@ -83,7 +85,7 @@ namespace LemonadeStand
             int output;
             output = Int32.Parse(input);
             
-            GiveMessage(name + "You will play for " + output + " days.");
+            GiveMessage(name + ", you will play for " + output + " days.");
             return output;
 
         }
@@ -101,7 +103,7 @@ namespace LemonadeStand
             string input = GetStringInput("Would you like to adjust your recipe? Type 'yes' if so.");
             if (input.ToLower() == "yes")
             {
-                string userInput = GetStringInput("Would you like to you like to change the lemons per Pitcher? Type 'yes'");
+               string userInput = GetStringInput("Would you like to you like to change the lemons per Pitcher? Type 'yes'");
                 if (userInput.ToLower() == "yes")
                 {
                     string lemonsPerPitcher = GetStringInput("What amount of lemons per pitcher would you like in the recipe?");
@@ -142,6 +144,26 @@ namespace LemonadeStand
             GiveMessage("High Temp: " + temperatureForecast);
             GiveMessage("Day: " + dayNumber);
             GiveMessage("Money: $" + money + "\n\n\n");
+        }
+
+        public void DisplayEndOfDayInfo(bool soldOut, string forecast, int temperatureForecast, int dayNumber, double money, int cupsSold, double popularity)
+        {
+            double percentageMaker = 100;
+            if (soldOut == true)
+            {
+                GiveMessage("You sold out today :( Plan better next time");
+            }
+            {
+                
+                GiveMessage("Day " + dayNumber + " Report:");
+                GiveMessage("Weather: " + forecast);
+                GiveMessage("High Temp: " + temperatureForecast);
+
+                GiveMessage("Money: $" + money );
+                GiveMessage("Popularity " + (popularity * percentageMaker));
+                GiveMessage("Cups Sold: " + cupsSold + "\n\n\n");
+            }
+
         }
         
     }

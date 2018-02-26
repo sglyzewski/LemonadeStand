@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace LemonadeStand
 {
     class Game
@@ -13,11 +14,13 @@ namespace LemonadeStand
         public UserInterface userInterface;
         public Weather weather;
         public Player player;
-        
+
+
         int dayNumber;
         int amountOfDaysInGame;
         //constructor
-        public Game (){
+        public Game()
+        {
             store = new Store();
             userInterface = new UserInterface();
             weather = new Weather();
@@ -38,7 +41,7 @@ namespace LemonadeStand
         {
             userInterface.GetPlayerName();
             amountOfDaysInGame = userInterface.GetDays(player.name);
-           
+
             while (amountOfDaysInGame > 0)
             {
                 Day day = new Day();
@@ -46,14 +49,18 @@ namespace LemonadeStand
                 userInterface.ShowRecipe();
                 userInterface.ChangeRecipe();
                 userInterface.DisplayInventory();
+                day.RunDay();
+                userInterface.DisplayEndOfDayInfo(day.CheckForSoldOut(), weather.forecast, weather.highTemperatureForecast, dayNumber, player.money, day.cupsSold, day.popularity);
                 dayNumber++;
                 amountOfDaysInGame--;
+
+                //}
+                //string input;
+                //input = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
+                // weather.DetermineForecast(weather.weatherOptions);
+
+
             }
-            //string input;
-            //input = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
-            // weather.DetermineForecast(weather.weatherOptions);
-     
-    
         }
     }
 }
