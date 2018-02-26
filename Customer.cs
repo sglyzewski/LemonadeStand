@@ -29,12 +29,32 @@ namespace LemonadeStand
             oddsOfPurchasing = random.Next(0, weatherFactorNumber);
         }
 
-        //public void GetWeatherFactorNumber()
-        //{
-        //    switch (weatherFactorNumber) {
-        //        case 
-        //        }
-        //}
+        public void GetWeatherFactorNumber()
+        {
+        
+            if (weather.highTemperatureForecast == 92 && weather.forecast != "rain")
+            {
+                weatherFactorNumber = 2;
+            }
+            if ((weather.highTemperatureForecast == 85 || weather.highTemperatureForecast ==75) && weather.forecast != "rain")
+            {
+                weatherFactorNumber = 3;
+            }
+            if((weather.highTemperatureForecast == 67 || weather.highTemperatureForecast ==53) && weather.forecast != "rain")
+            {
+                weatherFactorNumber = 4;
+            }
+            if((weather.highTemperatureForecast == 92 || weather.highTemperatureForecast == 85))
+            {
+                weatherFactorNumber = 5;
+            }
+            else
+            {
+               weatherFactorNumber = 6;
+            }
+
+             
+        }
 
         public void Purchase(int cupsSold)
         {

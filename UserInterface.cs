@@ -98,33 +98,38 @@ namespace LemonadeStand
         public void ChangeRecipe ()
         {
             GiveMessage("\n\n\nPrice/Quality Control: ");
-            string userInput = GetStringInput("Would you like to you like to change the lemons per Pitcher? Type 'yes'");
-            if (userInput.ToLower() == "yes") {
-                string lemonsPerPitcher = GetStringInput("What amount of lemons per pitcher would you like in the recipe?");
-                day.lemonsPerPitcher = Int32.Parse(lemonsPerPitcher);
-                userInput = "";
-            }
-            userInput = GetStringInput("Would you like to you like to change the cups of Sugar per Pitcher? Type 'yes'");
-            if (userInput.ToLower() == "yes")
+            string input = GetStringInput("Would you like to adjust your recipe? Type 'yes' if so.");
+            if (input.ToLower() == "yes")
             {
-                string cupsSugarPerPitcher = GetStringInput("What amount of cups of sugar per pitcher would you like in the recipe?");
-                day.cupsSugarPerPitcher = Int32.Parse(cupsSugarPerPitcher);
-                userInput = "";
-            }
-            userInput = GetStringInput("Would you like to you like to change the ice cubes per cup? Type 'yes'");
-            if (userInput.ToLower() == "yes")
-            {
-                string iceCubesPerGlass = GetStringInput("What amount of ice cubes per cup would you like in the recipe?");
-                day.iceCubesPerGlass = Int32.Parse(iceCubesPerGlass);
-                userInput = "";
-            }
+                string userInput = GetStringInput("Would you like to you like to change the lemons per Pitcher? Type 'yes'");
+                if (userInput.ToLower() == "yes")
+                {
+                    string lemonsPerPitcher = GetStringInput("What amount of lemons per pitcher would you like in the recipe?");
+                    day.lemonsPerPitcher = Int32.Parse(lemonsPerPitcher);
+                    userInput = "";
+                }
+                userInput = GetStringInput("Would you like to you like to change the cups of Sugar per Pitcher? Type 'yes'");
+                if (userInput.ToLower() == "yes")
+                {
+                    string cupsSugarPerPitcher = GetStringInput("What amount of cups of sugar per pitcher would you like in the recipe?");
+                    day.cupsSugarPerPitcher = Int32.Parse(cupsSugarPerPitcher);
+                    userInput = "";
+                }
+                userInput = GetStringInput("Would you like to you like to change the ice cubes per cup? Type 'yes'");
+                if (userInput.ToLower() == "yes")
+                {
+                    string iceCubesPerGlass = GetStringInput("What amount of ice cubes per cup would you like in the recipe?");
+                    day.iceCubesPerGlass = Int32.Parse(iceCubesPerGlass);
+                    userInput = "";
+                }
 
-            userInput = GetStringInput("Would you like to you like to change the price per cup? Type 'yes'");
-            if (userInput.ToLower() == "yes")
-            {
-                string pricePerCup = GetStringInput("What would you like the price per cup to be today?");
-                day.pricePerCup = Convert.ToDouble(pricePerCup);
-                userInput = "";
+                userInput = GetStringInput("Would you like to you like to change the price per cup? Type 'yes'");
+                if (userInput.ToLower() == "yes")
+                {
+                    string pricePerCup = GetStringInput("What would you like the price per cup to be today?");
+                    day.pricePerCup = Convert.ToDouble(pricePerCup);
+                    userInput = "";
+                }
             }
 
             ShowRecipe();

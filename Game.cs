@@ -38,13 +38,14 @@ namespace LemonadeStand
         {
             userInterface.GetPlayerName();
             amountOfDaysInGame = userInterface.GetDays(player.name);
-            userInterface.DisplayInventory();
+           
             while (amountOfDaysInGame > 0)
             {
                 Day day = new Day();
                 userInterface.DisplayBeginningOfDayInfo(weather.forecast, weather.highTemperatureForecast, dayNumber, player.money);
                 userInterface.ShowRecipe();
                 userInterface.ChangeRecipe();
+                userInterface.DisplayInventory();
                 dayNumber++;
                 amountOfDaysInGame--;
             }
