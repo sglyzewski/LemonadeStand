@@ -10,26 +10,44 @@ namespace LemonadeStand
     {
         //member variables
         public List<string> weatherOptions;
+        public List<int> temperatureOptions;
         public string forecast;
         public string currentWeather;
+        public int highTemperatureForecast;
         public Random random;
     //constructor
     public Weather()
     {
-            weatherOptions = new List<string>() { "sunny", "overcast", "rain", "cloudy" };
+            weatherOptions = new List<string>() { "sunny", "overcast", "rain", "cloudy", "hazy" };
+            temperatureOptions = new List<int>() {75, 53, 85, 92, 67};
             random = new Random();
      
         }
     //member methods
 
-       public void DetermineForecast(List<string> weatherOptions)
+       public string DetermineWeatherForecast()
         {
             int forecastIndexValue;
-            this.random = random;
+           
             forecastIndexValue = random.Next(0, weatherOptions.Count);
-            forecast = weatherOptions[forecastIndexValue];
-            Console.WriteLine(forecast);
+            return weatherOptions[forecastIndexValue];
+    
         }
+
+        public int DetermineTemperatureForecast()
+        {
+            int forecastIndexValue;
+           
+            forecastIndexValue = random.Next(0, temperatureOptions.Count);
+            return temperatureOptions[forecastIndexValue];
+        }
+
+        public void DetermineForecast()
+        {
+            forecast = DetermineWeatherForecast();
+            highTemperatureForecast = DetermineTemperatureForecast();
+        }
+
         
 }
 }

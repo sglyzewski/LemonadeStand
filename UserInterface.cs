@@ -10,11 +10,13 @@ namespace LemonadeStand
     {
         //member variables
         Day day;
+        Player player;
         //constructor
 
         public UserInterface()
         {
             day = new Day();
+            player = new Player();
         }
         //member methods
 
@@ -51,6 +53,11 @@ namespace LemonadeStand
             return input;
         }
 
+        public void GetPlayerName()
+        {
+            player.name = GetStringInput("Welcome to lemonade stand! What is your name?");
+        }
+
         public int GetDays()
         {
             string input = GetStringInput("How many days would you like to play for?");
@@ -66,9 +73,12 @@ namespace LemonadeStand
         {
             GiveMessage("Your current lemonade recipe is: \nLemons Per Pitcher: " + day.lemonsPerPitcher + "\nCups of Sugar Per Pitcher: " + day.cupsSugarPerPitcher + "\nIce Cubes Per Glass: " + day.iceCubesPerGlass + "\nPrice Per Cup: $" + day.pricePerCup);
         }
+
+        
+
         public void ChangeRecipe ()
         {
-            
+            GiveMessage("Price/Quality Control: ");
             string userInput = GetStringInput("Would you like to you like to change the lemons per Pitcher? Type 'yes'");
             if (userInput.ToLower() == "yes") {
                 string lemonsPerPitcher = GetStringInput("What amount of lemons per pitcher would you like in the recipe?");
@@ -99,9 +109,15 @@ namespace LemonadeStand
             }
 
             ShowRecipe();
+        }
 
-            
-
+        public void DisplayBeginningOfDayInfo(string forecast, int temperatureForecast, int dayNumber, double money)
+        {
+            GiveMessage("Day " + dayNumber + " info:");
+            GiveMessage("Forecast: " + forecast);
+            GiveMessage("High Temp: " + temperatureForecast);
+            GiveMessage("Day: " + dayNumber);
+            GiveMessage("Money: $" + money);
         }
         
     }

@@ -12,13 +12,14 @@ namespace LemonadeStand
         
 
         //recipe
-        public  int lemonsPerPitcher;
+        public int lemonsPerPitcher;
         public int cupsSugarPerPitcher;
         public int iceCubesPerGlass;
         public double pricePerCup;
         public int cupsSold;
         public int potentialCustomers;
         public double popularity;
+        Weather weather;
 
         //constructor
         public Day()
@@ -27,22 +28,34 @@ namespace LemonadeStand
             cupsSugarPerPitcher = 4;
             iceCubesPerGlass = 4;
             pricePerCup = 0.25;
+            weather = new Weather();
 
         }
 
         //member methods
-        public void DetermineRecipe()
-        {
+        
 
-        }
+
         public void DetermineForecast()
         {
-
+            weather.DetermineForecast();
         }
 
         public void GetPopularity()
         {
             popularity = (cupsSold / potentialCustomers);
+        }
+
+        public void MorningDayReport()
+        {
+
+        }
+
+        public void RunDay()
+        {
+            weather.DetermineForecast();
+
+
         }
     }
 

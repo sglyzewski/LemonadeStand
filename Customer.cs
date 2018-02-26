@@ -13,6 +13,7 @@ namespace LemonadeStand
         Random random;
         Weather weather;
         int weatherFactorNumber;
+        bool purchase;
         
         //constructor
         public Customer()
@@ -31,6 +32,14 @@ namespace LemonadeStand
         public void GetWeatherFactorNumber()
         {
 
+        }
+
+        public void Purchase(int cupsSold)
+        {
+            if(purchase == true)
+            {
+                cupsSold++;
+            }
         }
     }
 }

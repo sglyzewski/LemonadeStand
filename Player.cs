@@ -13,7 +13,8 @@ namespace LemonadeStand
         double expenses;
         double income;
         double liquidatedInventoryValue; //total worth of a company's physical assets when it goes out of business; determined by assets i.e. inventory
-        double money;
+        public double money;
+        public string name;
 
         //member variables
         //constructor
