@@ -11,12 +11,21 @@ namespace LemonadeStand
         //member variables
         Day day;
         Player player;
+
+        Lemons lemons;
+        Sugar sugar;
+        IceCubes iceCubes;
+        Cups cups;
         //constructor
 
         public UserInterface()
         {
             day = new Day();
             player = new Player();
+            lemons = new Lemons();
+            sugar = new Sugar();
+            iceCubes = new IceCubes();
+            cups = new Cups();
         }
         //member methods
 
@@ -24,6 +33,16 @@ namespace LemonadeStand
         {
             Console.WriteLine(message);
             
+        }
+
+        public void DisplayInventory()
+        {
+            GiveMessage("Inventory/Purchasing:");
+            GiveMessage("You currently have...");
+            GiveMessage(cups.currentStock + " cups");
+            GiveMessage(lemons.currentStock + " lemons");
+            GiveMessage(sugar.currentStock + " cups of sugar");
+            GiveMessage(iceCubes.currentStock + " ice cubes\n\n\n");
         }
 
         public string GetStringInput(string message)
@@ -58,13 +77,13 @@ namespace LemonadeStand
             player.name = GetStringInput("Welcome to lemonade stand! What is your name?");
         }
 
-        public int GetDays()
+        public int GetDays(string name)
         {
             string input = GetStringInput("How many days would you like to play for?");
             int output;
             output = Int32.Parse(input);
             
-            GiveMessage("You will play for" + output + " days.");
+            GiveMessage(name + "You will play for " + output + " days.");
             return output;
 
         }
@@ -78,7 +97,7 @@ namespace LemonadeStand
 
         public void ChangeRecipe ()
         {
-            GiveMessage("Price/Quality Control: ");
+            GiveMessage("\n\n\nPrice/Quality Control: ");
             string userInput = GetStringInput("Would you like to you like to change the lemons per Pitcher? Type 'yes'");
             if (userInput.ToLower() == "yes") {
                 string lemonsPerPitcher = GetStringInput("What amount of lemons per pitcher would you like in the recipe?");
@@ -117,7 +136,7 @@ namespace LemonadeStand
             GiveMessage("Forecast: " + forecast);
             GiveMessage("High Temp: " + temperatureForecast);
             GiveMessage("Day: " + dayNumber);
-            GiveMessage("Money: $" + money);
+            GiveMessage("Money: $" + money + "\n\n\n");
         }
         
     }

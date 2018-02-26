@@ -13,6 +13,7 @@ namespace LemonadeStand
         public UserInterface userInterface;
         public Weather weather;
         public Player player;
+        
         int dayNumber;
         int amountOfDaysInGame;
         //constructor
@@ -36,7 +37,8 @@ namespace LemonadeStand
         public void RunGame()
         {
             userInterface.GetPlayerName();
-            amountOfDaysInGame = userInterface.GetDays();
+            amountOfDaysInGame = userInterface.GetDays(player.name);
+            userInterface.DisplayInventory();
             while (amountOfDaysInGame > 0)
             {
                 Day day = new Day();

@@ -29,10 +29,12 @@ namespace LemonadeStand
             oddsOfPurchasing = random.Next(0, weatherFactorNumber);
         }
 
-        public void GetWeatherFactorNumber()
-        {
-
-        }
+        //public void GetWeatherFactorNumber()
+        //{
+        //    switch (weatherFactorNumber) {
+        //        case 
+        //        }
+        //}
 
         public void Purchase(int cupsSold)
         {
