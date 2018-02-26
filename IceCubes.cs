@@ -12,5 +12,11 @@ namespace LemonadeStand
         //member variables
         //constructor
         //member methods
+        public override bool Spoiler(int spoilNumber)
+        {
+            return true;
+
+
+        }
     }
 }

@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Inventory
+    abstract class Inventory
     {
         //member variables
-        int currentStock;
-        List<float> prices;
-        
-        
+       public int currentStock;
+       public int spoilNumber;
+
+
+
         //constructor
         //member methods
+        public abstract bool Spoiler(int spoilNumber);
+        
 
     }
 }

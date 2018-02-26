@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Player
+    public class Player
     {
         //member variables
         double profit;
         double expenses;
         double income;
         double liquidatedInventoryValue; //total worth of a company's physical assets when it goes out of business; determined by assets i.e. inventory
+        int popularity;
+        double money;
 
         //member variables
         //constructor
+        public Player()
+        {
+            money = 20.00;
+            
+        }
         //member methods
 
     }

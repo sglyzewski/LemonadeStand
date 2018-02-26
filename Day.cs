@@ -9,28 +9,33 @@ namespace LemonadeStand
     class Day
     {
         //member variables
-        Customer customer;
-        public List<KeyValuePair<int, string>> recipe;
-        int LemonsPerPitcher;
+        
+
+        //recipe
+        int lemonsPerPitcher;
         int cupsSugarPerPitcher;
         int iceCubesPerGlass;
-        int pricePerCup;
+        double pricePerCup;
+
         //constrListuctor
-        public void CreateRecipe()
+        public Day()
         {
-            recipe = new List<KeyValuePair<int, string>>();
-            {
-                new KeyValuePair<string, int>("Price Per Cup", pricePerCup);
-                new KeyValuePair<string, int>("Number of Lemons Per Pitcher", LemonsPerPitcher);
-                new KeyValuePair<string, int>("Cups of Sugar Per Pitcher", cupsSugarPerPitcher);
-                new KeyValuePair<string, int>("Ice Cubes per Glass", iceCubesPerGlass);
-            }
+            lemonsPerPitcher = 4;
+            cupsSugarPerPitcher = 4;
+            iceCubesPerGlass = 4;
+            pricePerCup = 0.25;
 
         }
 
-
-
         //member methods
+        public void DetermineRecipe()
+        {
+
+        }
+        public void DetermineForecast()
+        {
+
+        }
     }
 
 }

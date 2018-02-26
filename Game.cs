@@ -9,19 +9,28 @@ namespace LemonadeStand
     class Game
     {
         //member variables
-        Day day = new Day();
+        public Store store;
+        public UserInterface userInterface;
+        public Weather weather;
         //constructor
+        public Game (){
+            store = new Store();
+            userInterface = new UserInterface();
+            weather = new Weather();
+         }
         //member functions
+
+        public void DetermineDayScore()
+        {
+
+        }
+
+
         public void RunGame()
         {
-            day.CreateRecipe();
-            foreach (KeyValuePair<int, string> item in day.recipe)
-            {
-                Console.WriteLine(item.Key + ":" + item.Value);
-
-               
-
-            }
+            //string input;
+            //input = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
+            weather.DetermineForecast(weather.weatherOptions);
         }
     }
 }
