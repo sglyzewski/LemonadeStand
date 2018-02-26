@@ -12,11 +12,13 @@ namespace LemonadeStand
         public Store store;
         public UserInterface userInterface;
         public Weather weather;
+        int amountOfDaysInGame;
         //constructor
         public Game (){
             store = new Store();
             userInterface = new UserInterface();
             weather = new Weather();
+           
          }
         //member functions
 
@@ -28,9 +30,12 @@ namespace LemonadeStand
 
         public void RunGame()
         {
+            amountOfDaysInGame = userInterface.GetDays();
             //string input;
             //input = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
-            weather.DetermineForecast(weather.weatherOptions);
+            // weather.DetermineForecast(weather.weatherOptions);
+     
+    
         }
     }
 }

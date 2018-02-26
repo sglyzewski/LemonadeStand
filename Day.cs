@@ -12,12 +12,15 @@ namespace LemonadeStand
         
 
         //recipe
-        int lemonsPerPitcher;
-        int cupsSugarPerPitcher;
-        int iceCubesPerGlass;
-        double pricePerCup;
+        public  int lemonsPerPitcher;
+        public int cupsSugarPerPitcher;
+        public int iceCubesPerGlass;
+        public double pricePerCup;
+        public int cupsSold;
+        public int potentialCustomers;
+        public double popularity;
 
-        //constrListuctor
+        //constructor
         public Day()
         {
             lemonsPerPitcher = 4;
@@ -35,6 +38,11 @@ namespace LemonadeStand
         public void DetermineForecast()
         {
 
+        }
+
+        public void GetPopularity()
+        {
+            popularity = (cupsSold / potentialCustomers);
         }
     }
 

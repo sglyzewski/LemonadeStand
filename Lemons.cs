@@ -11,6 +11,10 @@ namespace LemonadeStand
 
         //member variables
         //constructor
+        public Lemons()
+        {
+            currentStock = 0;
+        }
         //member methods
         public override bool Spoiler(int spoilNumber)
         {

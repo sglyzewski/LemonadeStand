@@ -11,12 +11,14 @@ namespace LemonadeStand
         //member variables
         int oddsOfPurchasing;
         Random random;
+        Weather weather;
         int weatherFactorNumber;
         
         //constructor
-        public Customer(Random random)
+        public Customer()
         {
-            this.random = random;
+            random = new Random();
+            weather = new Weather();
         }
 
         //member methods
@@ -24,6 +26,11 @@ namespace LemonadeStand
         {
 
             oddsOfPurchasing = random.Next(0, weatherFactorNumber);
+        }
+
+        public void GetWeatherFactorNumber()
+        {
+
         }
     }
 }

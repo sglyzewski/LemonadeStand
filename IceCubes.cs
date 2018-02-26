@@ -11,12 +11,27 @@ namespace LemonadeStand
 
         //member variables
         //constructor
+        public IceCubes()
+        {
+            currentStock = 0;
+           
+        }
         //member methods
         public override bool Spoiler(int spoilNumber)
         {
+        
             return true;
-
-
         }
+
+        public string SpoilAlert()
+        {
+            if (Spoiler(spoilNumber) == true)
+            {
+                return ("Your remaining " + currentStock + " ice cubes have melted.");
+            }
+            else
+                return ("");
+        }
+
     }
 }
