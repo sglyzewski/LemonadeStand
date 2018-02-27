@@ -9,24 +9,16 @@ namespace LemonadeStand
     public class UserInterface
     {
         //member variables
-        Day day;
-        Player player;
+      
 
-        Lemons lemons;
-        Sugar sugar;
-        IceCubes iceCubes;
-        Cups cups;
+        
        
         //constructor
 
         public UserInterface()
         {
-            day = new Day();
-            player = new Player();
-            lemons = new Lemons();
-            sugar = new Sugar();
-            iceCubes = new IceCubes();
-            cups = new Cups();
+        
+           
             
         }
         //member methods
@@ -37,14 +29,14 @@ namespace LemonadeStand
             
         }
 
-        public void DisplayInventory()
+        public void DisplayInventory(int cupsCurrentStock, int lemonsCurrentStock, int sugarCurrentStock, int iceCubesCurrentStock )
         {
             GiveMessage("Inventory/Purchasing:");
             GiveMessage("You currently have...");
-            GiveMessage(cups.currentStock + " cups");
-            GiveMessage(lemons.currentStock + " lemons");
-            GiveMessage(sugar.currentStock + " cups of sugar");
-            GiveMessage(iceCubes.currentStock + " ice cubes\n\n\n");
+            GiveMessage(cupsCurrentStock + " cups");
+            GiveMessage(lemonsCurrentStock + " lemons");
+            GiveMessage(sugarCurrentStock + " cups of sugar");
+            GiveMessage(iceCubesCurrentStock + " ice cubes\n\n\n");
         }
 
         public string GetStringInput(string message)
@@ -74,9 +66,11 @@ namespace LemonadeStand
             return input;
         }
 
-        public void GetPlayerName()
+        public string GetPlayerName()
         {
-            player.name = GetStringInput("Welcome to lemonade stand! What is your name?");
+            string name;
+            name = GetStringInput("Welcome to lemonade stand! What is your name?");
+            return name;
         }
 
         public int GetDays(string name)
@@ -90,14 +84,14 @@ namespace LemonadeStand
 
         }
 
-        public void ShowRecipe()
+        public void ShowRecipe(int lemonsPerPitcherDay, int cupsSugarPerPitcherDay, int iceCubesPerGlassDay, double pricePerCupDay )
         {
-            GiveMessage("Your current lemonade recipe is: \nLemons Per Pitcher: " + day.lemonsPerPitcher + "\nCups of Sugar Per Pitcher: " + day.cupsSugarPerPitcher + "\nIce Cubes Per Glass: " + day.iceCubesPerGlass + "\nPrice Per Cup: $" + day.pricePerCup);
+            GiveMessage("Your current lemonade recipe is: \nLemons Per Pitcher: " + lemonsPerPitcherDay + "\nCups of Sugar Per Pitcher: " + cupsSugarPerPitcherDay + "\nIce Cubes Per Glass: " + iceCubesPerGlassDay + "\nPrice Per Cup: $" + pricePerCupDay);
         }
 
         
 
-        public void ChangeRecipe ()
+        public void ChangeRecipe (int lemonsPerPitcherDay, int cupsSugarPerPitcherDay, int iceCubesPerGlassDay, double pricePerCupDay )
         {
             GiveMessage("\n\n\nPrice/Quality Control: ");
             string input = GetStringInput("Would you like to adjust your recipe? Type 'yes' if so.");
@@ -107,21 +101,21 @@ namespace LemonadeStand
                 if (userInput.ToLower() == "yes")
                 {
                     string lemonsPerPitcher = GetStringInput("What amount of lemons per pitcher would you like in the recipe?");
-                    day.lemonsPerPitcher = Int32.Parse(lemonsPerPitcher);
+                    lemonsPerPitcherDay = Int32.Parse(lemonsPerPitcher);
                     userInput = "";
                 }
                 userInput = GetStringInput("Would you like to you like to change the cups of Sugar per Pitcher? Type 'yes'");
                 if (userInput.ToLower() == "yes")
                 {
                     string cupsSugarPerPitcher = GetStringInput("What amount of cups of sugar per pitcher would you like in the recipe?");
-                    day.cupsSugarPerPitcher = Int32.Parse(cupsSugarPerPitcher);
+                    cupsSugarPerPitcherDay = Int32.Parse(cupsSugarPerPitcher);
                     userInput = "";
                 }
                 userInput = GetStringInput("Would you like to you like to change the ice cubes per cup? Type 'yes'");
                 if (userInput.ToLower() == "yes")
                 {
                     string iceCubesPerGlass = GetStringInput("What amount of ice cubes per cup would you like in the recipe?");
-                    day.iceCubesPerGlass = Int32.Parse(iceCubesPerGlass);
+                    iceCubesPerGlassDay = Int32.Parse(iceCubesPerGlass);
                     userInput = "";
                 }
 
@@ -129,12 +123,12 @@ namespace LemonadeStand
                 if (userInput.ToLower() == "yes")
                 {
                     string pricePerCup = GetStringInput("What would you like the price per cup to be today?");
-                    day.pricePerCup = Convert.ToDouble(pricePerCup);
+                    pricePerCupDay = Convert.ToDouble(pricePerCup);
                     userInput = "";
                 }
             }
 
-            ShowRecipe();
+        
         }
 
         public void DisplayBeginningOfDayInfo(string forecast, int temperatureForecast, int dayNumber, double money)

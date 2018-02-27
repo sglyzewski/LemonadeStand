@@ -26,7 +26,10 @@ namespace LemonadeStand
         public string cupsSugar;
         public string paperCups;
 
+        
+
         UserInterface userInterface;
+        
         //constructor
         public Store()
         {
@@ -35,6 +38,7 @@ namespace LemonadeStand
             cupsSugar = "Cups of Sugar";
             paperCups = "Paper Cups";
             userInterface = new UserInterface();
+            //player = new Player();
             items = new List<string>() { lemons, iceCubes, cupsSugar, paperCups };
 
             lemonPrices = new List<double> { 0.86, 2.24, 4.37 };
@@ -57,7 +61,7 @@ namespace LemonadeStand
 
         //member methods
 
-        public void purchaseFromStore(int lemonsInventory, int iceCubesInventory, int sugarInventory, int cupsInventory)
+        public void PurchaseFromStore(Store store, double money, int lemonsInventory, int iceCubesInventory, int sugarInventory, int cupsInventory)
         {
             string input = "";
             string amountToPurchase;
@@ -70,18 +74,26 @@ namespace LemonadeStand
                     case "lemons":
                        amountToPurchase = userInterface.DisplayStoreItem(lemons, lemonPrices, lemonAmount);
                        amountToPurchaseInt = Int32.Parse(amountToPurchase);
+                        money = money - lemonPrices[amountToPurchaseInt - 1];
+                        lemonsInventory = lemonsInventory + lemonAmount[amountToPurchaseInt - 1];
                         break;
                     case "ice":
                         amountToPurchase = userInterface.DisplayStoreItem(iceCubes, iceCubesPrices, iceCubesAmount);
                         amountToPurchaseInt = Int32.Parse(amountToPurchase);
+                        money = money - iceCubesPrices[amountToPurchaseInt - 1];
+                        iceCubesInventory = iceCubesInventory + iceCubesAmount[amountToPurchaseInt - 1];
                         break;
                     case "sugar":
                         amountToPurchase = userInterface.DisplayStoreItem(cupsSugar, cupsSugarPrices, cupsSugarAmount);
                         amountToPurchaseInt = Int32.Parse(amountToPurchase);
+                        money = money - cupsSugarPrices[amountToPurchaseInt - 1];
+                        sugarInventory = sugarInventory + cupsSugarAmount[amountToPurchaseInt - 1];
                         break;
                     case "cups":
                         amountToPurchase = userInterface.DisplayStoreItem(paperCups, paperCupsPrices, paperCupsAmount);
                         amountToPurchaseInt = Int32.Parse(amountToPurchase);
+                        money = money - paperCupsPrices[amountToPurchaseInt - 1];
+                        cupsInventory = cupsInventory + paperCupsAmount[amountToPurchaseInt - 1];
                         break;
 
                     default:

@@ -12,7 +12,7 @@ namespace LemonadeStand
         public List<string> weatherOptions;
         public List<int> temperatureOptions;
         public string forecast;
-        public string currentWeather;
+
         public int highTemperatureForecast;
         public Random random;
     //constructor

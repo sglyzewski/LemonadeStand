@@ -12,8 +12,12 @@ namespace LemonadeStand
         //member variables
         public Store store;
         public UserInterface userInterface;
-        public Weather weather;
+        //public Weather weather;
         public Player player;
+        public  Lemons lemons;
+        public Sugar sugar;
+        public IceCubes iceCubes;
+        public Cups cups;
 
 
         int dayNumber;
@@ -23,34 +27,37 @@ namespace LemonadeStand
         {
             store = new Store();
             userInterface = new UserInterface();
-            weather = new Weather();
+           // weather = new Weather();
             player = new Player();
             amountOfDaysInGame = 0;
             dayNumber = 1;
+            lemons = new Lemons();
+            sugar = new Sugar();
+            iceCubes = new IceCubes();
+            cups = new Cups();
 
         }
         //member functions
 
-        public void DetermineDayScore()
+        public void DetermineScore()
         {
-
+            userInterface.GiveMessage("End of Season Report:");
+            userInterface.GiveMessage("Money: " + player.money);
         }
 
 
         public void RunGame()
         {
-            userInterface.GetPlayerName();
+            player.name = userInterface.GetPlayerName();
             amountOfDaysInGame = userInterface.GetDays(player.name);
 
             while (amountOfDaysInGame > 0)
             {
                 Day day = new Day();
-                userInterface.DisplayBeginningOfDayInfo(weather.forecast, weather.highTemperatureForecast, dayNumber, player.money);
-                userInterface.ShowRecipe();
-                userInterface.ChangeRecipe();
-                userInterface.DisplayInventory();
-                day.RunDay();
-                userInterface.DisplayEndOfDayInfo(day.CheckForSoldOut(), weather.forecast, weather.highTemperatureForecast, dayNumber, player.money, day.cupsSold, day.popularity);
+               
+                userInterface.DisplayInventory(cups.currentStock, lemons.currentStock, sugar.currentStock, iceCubes.currentStock);
+                day.RunDay(store, player, dayNumber, lemons.currentStock, iceCubes.currentStock, sugar.currentStock, cups.currentStock);
+                
                 dayNumber++;
                 amountOfDaysInGame--;
 
@@ -61,6 +68,7 @@ namespace LemonadeStand
 
 
             }
+            DetermineScore();
         }
     }
 }

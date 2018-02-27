@@ -11,7 +11,7 @@ namespace LemonadeStand
         //member variables
         int oddsOfPurchasing;
         Random random;
-        Weather weather;
+        
         int weatherFactorNumber;
         bool purchase;
         
@@ -19,7 +19,7 @@ namespace LemonadeStand
         public Customer()
         {
             random = new Random();
-            weather = new Weather();
+           
         }
 
         //member methods
@@ -28,7 +28,7 @@ namespace LemonadeStand
             oddsOfPurchasing = random.Next(1, weatherFactorNumber);
         }
 
-        public void GetWeatherFactorNumber()
+        public void GetWeatherFactorNumber(Weather weather)
         {
         
             if (weather.highTemperatureForecast == 92 && weather.forecast != "rain")
@@ -54,9 +54,9 @@ namespace LemonadeStand
              
         }
 
-        public void Purchase(int cupsSold)
+        public void Purchase(int cupsSold, Weather weather)
         {
-            GetWeatherFactorNumber();
+            GetWeatherFactorNumber(weather);
             GetOdds();
             if (oddsOfPurchasing == 1)
             {

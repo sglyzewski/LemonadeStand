@@ -21,6 +21,7 @@ namespace LemonadeStand
         public Player()
         {
             money = 20.00;
+            profit = 0;
             
         }
         //member methods

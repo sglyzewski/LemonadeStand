@@ -21,10 +21,13 @@ namespace LemonadeStand
         int pitcherLooper;
         Random random;
         Weather weather;
-        IceCubes iceCubes;
-        Lemons lemons;
-        Sugar sugar;
-        Cups cups;
+        //IceCubes iceCubes;
+        //Lemons lemons;
+        //Sugar sugar;
+        //Cups cups;
+        //Store store;
+    
+        UserInterface userInterface;
 
         //constructor
         public Day()
@@ -35,11 +38,14 @@ namespace LemonadeStand
             pricePerCup = 0.25;
             cupsSold = 0;
             random = new Random();
-            lemons = new Lemons();
-            sugar = new Sugar();
-            iceCubes = new IceCubes();
-            cups = new Cups();
+            //lemons = new Lemons();
+            //sugar = new Sugar();
+            //iceCubes = new IceCubes();
+            //cups = new Cups();
             weather = new Weather();
+            //store = new Store();
+            userInterface = new UserInterface();
+            
 
         }
 
@@ -69,26 +75,26 @@ namespace LemonadeStand
             }
         }
 
-        public void DecreaseInventory()
+        public void DecreaseInventory(int cupsCurrentStock, int iceCubesCurrentStock, int lemonsCurrentStock, int sugarCurrentStock)
         {
 
-            for (int i = 1; i <= cupsSold || (CheckForSoldOut() == true); i++)
+            for (int i = 1; i <= cupsSold || (CheckForSoldOut(cupsCurrentStock, iceCubesCurrentStock, lemonsCurrentStock, sugarCurrentStock) == true); i++)
             {
-                cups.currentStock --;
-                iceCubes.currentStock = iceCubes.currentStock - iceCubesPerGlass;
+                cupsCurrentStock --;
+                iceCubesCurrentStock = iceCubesCurrentStock - iceCubesPerGlass;
                 if (i % pitcherLooper ==0)
                 {
-                    lemons.currentStock = lemons.currentStock - lemonsPerPitcher;
-                    sugar.currentStock = sugar.currentStock - cupsSugarPerPitcher;
+                    lemonsCurrentStock = lemonsCurrentStock - lemonsPerPitcher;
+                    sugarCurrentStock = sugarCurrentStock - cupsSugarPerPitcher;
                 }
             }
 
 
         }
 
-        public bool CheckForSoldOut()
+        public bool CheckForSoldOut(int iceCubesCurrentStock, int lemonsCurrentStock, int sugarCurrentStock, int cupsCurrentStock)
         {
-            if ((iceCubes.currentStock) < 1 || (lemons.currentStock < 1) || (sugar.currentStock < 1) || (cups.currentStock < 0))
+            if ((iceCubesCurrentStock) < 1 || (lemonsCurrentStock < 1) || (sugarCurrentStock < 1) || (cupsCurrentStock < 0))
             {
                 return true;
             }
@@ -114,17 +120,23 @@ namespace LemonadeStand
             for(int i = 0; i<potentialCustomers; i++)
             {
                 Customer customer = new Customer();
-                customer.Purchase(cupsSold);
+                customer.Purchase(cupsSold, weather);
             }
         }
-        public void RunDay()
+        public void RunDay(Store store, Player player, int dayNumber, int lemonsCurrentStock, int iceCubesCurrentStock, int sugarCurrentStock, int cupsCurrentStock)
         {
             weather.DetermineForecast();
+            userInterface.DisplayBeginningOfDayInfo(weather.forecast, weather.highTemperatureForecast, dayNumber, player.money);
+            userInterface.ShowRecipe(lemonsPerPitcher, cupsSugarPerPitcher, iceCubesPerGlass, pricePerCup);
+            userInterface.ChangeRecipe(lemonsPerPitcher, cupsSugarPerPitcher, iceCubesPerGlass, pricePerCup);
+            userInterface.ShowRecipe(lemonsPerPitcher, cupsSugarPerPitcher, iceCubesPerGlass, pricePerCup);
+            store.PurchaseFromStore(store, player.money, lemonsCurrentStock, iceCubesCurrentStock, sugarCurrentStock, cupsCurrentStock);
             DeterminePotentialCustomers();
             DetermineGlassesPerPitcher();
-            DecreaseInventory();
+            DecreaseInventory(lemonsCurrentStock, iceCubesCurrentStock, sugarCurrentStock, cupsCurrentStock);
             GetPopularity();
-            
+            userInterface.DisplayEndOfDayInfo(CheckForSoldOut(iceCubesCurrentStock, lemonsCurrentStock, sugarCurrentStock, cupsCurrentStock), weather.forecast, weather.highTemperatureForecast, dayNumber, player.money, cupsSold, popularity);
+
 
 
         }
