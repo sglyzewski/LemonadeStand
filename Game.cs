@@ -14,11 +14,10 @@ namespace LemonadeStand
         public UserInterface userInterface;
         //public Weather weather;
         public Player player;
-        public  Lemons lemons;
+        public Lemons lemons;
         public Sugar sugar;
         public IceCubes iceCubes;
         public Cups cups;
-
 
         int dayNumber;
         int amountOfDaysInGame;
@@ -56,7 +55,7 @@ namespace LemonadeStand
                 Day day = new Day();
                
                 userInterface.DisplayInventory(cups.currentStock, lemons.currentStock, sugar.currentStock, iceCubes.currentStock);
-                day.RunDay(store, player, dayNumber, lemons.currentStock, iceCubes.currentStock, sugar.currentStock, cups.currentStock);
+                day.RunDay(store, player, dayNumber, lemons, iceCubes, sugar, cups);
                 
                 dayNumber++;
                 amountOfDaysInGame--;
