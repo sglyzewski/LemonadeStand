@@ -12,61 +12,67 @@ namespace LemonadeStand
         int oddsOfPurchasing;
         Random random;
         
-        int weatherFactorNumber;
-        bool purchase;
+        
         
         //constructor
         public Customer()
         {
-            random = new Random();
+            
            
         }
 
         //member methods
-        public void GetOdds()
+        public void GetOddsOfPurchasing(Weather weather)
         {
-            oddsOfPurchasing = random.Next(1, weatherFactorNumber);
+            random = new Random();
+            oddsOfPurchasing = random.Next(1, weather.weatherFactorNumber);
         }
 
-        public void GetWeatherFactorNumber(Weather weather)
-        {
+        //public void GetWeatherFactorNumber(Weather weather)
+        //{
         
-            if (weather.highTemperatureForecast == 92 && weather.forecast != "rain")
+        //    if (weather.highTemperatureForecast == 92 && weather.forecast != "rain")
+        //    {
+        //        weatherFactorNumber = 2;
+        //    }
+        //    if ((weather.highTemperatureForecast == 85 || weather.highTemperatureForecast ==75) && weather.forecast != "rain")
+        //    {
+        //        weatherFactorNumber = 3;
+        //    }
+        //    if((weather.highTemperatureForecast == 67 || weather.highTemperatureForecast ==53) && weather.forecast != "rain")
+        //    {
+        //        weatherFactorNumber = 4;
+        //    }
+        //    if((weather.highTemperatureForecast == 92 || weather.highTemperatureForecast == 85))
+        //    {
+        //        weatherFactorNumber = 5;
+        //    }
+        //    else
+        //    {
+        //       weatherFactorNumber = 6;
+        //    }
+             
+        //}
+
+        public bool Purchase(int cupsSold, Weather weather)
+        {
+            weather.GetWeatherFactorNumber();
+            GetOddsOfPurchasing(weather);
+            if (oddsOfPurchasing == 1 || oddsOfPurchasing == 2)
             {
-                weatherFactorNumber = 2;
-            }
-            if ((weather.highTemperatureForecast == 85 || weather.highTemperatureForecast ==75) && weather.forecast != "rain")
-            {
-                weatherFactorNumber = 3;
-            }
-            if((weather.highTemperatureForecast == 67 || weather.highTemperatureForecast ==53) && weather.forecast != "rain")
-            {
-                weatherFactorNumber = 4;
-            }
-            if((weather.highTemperatureForecast == 92 || weather.highTemperatureForecast == 85))
-            {
-                weatherFactorNumber = 5;
+                
+                cupsSold++;
+                return true;
             }
             else
             {
-               weatherFactorNumber = 6;
-            }
-             
-        }
-
-        public void Purchase(int cupsSold, Weather weather)
-        {
-            GetWeatherFactorNumber(weather);
-            GetOdds();
-            if (oddsOfPurchasing == 1)
-            {
-                purchase = true;
+                return false;
             }
 
-            if (purchase == true)
-            {
-                cupsSold++;
-            }
+            //if (purchase == true)
+            //{
+            //    cupsSold++;
+            //}
         }
     }
 }

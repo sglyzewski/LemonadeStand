@@ -31,7 +31,7 @@ namespace LemonadeStand
 
         public void DisplayInventory(int cupsCurrentStock, int lemonsCurrentStock, int sugarCurrentStock, int iceCubesCurrentStock )
         {
-            GiveMessage("Inventory/Purchasing:");
+            GiveMessage("\n\n\nInventory/Purchasing:");
             GiveMessage("You currently have...");
             GiveMessage(cupsCurrentStock + " cups");
             GiveMessage(lemonsCurrentStock + " lemons");

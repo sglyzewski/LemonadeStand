@@ -41,7 +41,7 @@ namespace LemonadeStand
         public void DetermineScore()
         {
             userInterface.GiveMessage("End of Season Report:");
-            userInterface.GiveMessage("Money: " + player.money);
+            userInterface.GiveMessage("Money: " + player.Money);
         }
 
 
@@ -60,11 +60,7 @@ namespace LemonadeStand
                 dayNumber++;
                 amountOfDaysInGame--;
 
-                //}
-                //string input;
-                //input = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
-                // weather.DetermineForecast(weather.weatherOptions);
-
+      
 
             }
             DetermineScore();

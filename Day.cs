@@ -21,11 +21,7 @@ namespace LemonadeStand
         int pitcherLooper;
         Random random;
         Weather weather;
-        //IceCubes iceCubes;
-        //Lemons lemons;
-        //Sugar sugar;
-        //Cups cups;
-        //Store store;
+        
     
         UserInterface userInterface;
 
@@ -38,12 +34,9 @@ namespace LemonadeStand
             pricePerCup = 0.25;
             cupsSold = 0;
             random = new Random();
-            //lemons = new Lemons();
-            //sugar = new Sugar();
-            //iceCubes = new IceCubes();
-            //cups = new Cups();
+         
             weather = new Weather();
-            //store = new Store();
+          
             userInterface = new UserInterface();
             
 
@@ -62,6 +55,8 @@ namespace LemonadeStand
         {
             popularity = (cupsSold / potentialCustomers);
         }
+
+       
 
         public void DetermineGlassesPerPitcher ()
         {
@@ -92,6 +87,7 @@ namespace LemonadeStand
 
         }
 
+        
         public bool CheckForSoldOut(int iceCubesCurrentStock, int lemonsCurrentStock, int sugarCurrentStock, int cupsCurrentStock)
         {
             if ((iceCubesCurrentStock) < 1 || (lemonsCurrentStock < 1) || (sugarCurrentStock < 1) || (cupsCurrentStock < 0))
@@ -202,7 +198,7 @@ namespace LemonadeStand
 
         }
 
-        public void PurchaseFromStore(Store store, double money, Lemons lemons, IceCubes iceCubes, Sugar sugar, Cups cups)
+        public void PurchaseFromStore(Store store, Player player, Lemons lemons, IceCubes iceCubes, Sugar sugar, Cups cups)
         {
             string input = "";
             string amountToPurchase = "";
@@ -213,18 +209,18 @@ namespace LemonadeStand
                 switch (input.ToLower())
                 {
                     case "lemons":
-                        PurchaseLemons(store, money, lemons, amountToPurchase, amountToPurchaseInt);
+                        PurchaseLemons(store, player, lemons, amountToPurchase, amountToPurchaseInt);
                         break;
 
                     case "ice":
-                        PurchaseIce(store, money, iceCubes, amountToPurchase, amountToPurchaseInt);
+                        PurchaseIce(store, player, iceCubes, amountToPurchase, amountToPurchaseInt);
                         break;
                     case "sugar":
 
-                        PurchaseSugar(store, money, sugar, amountToPurchase, amountToPurchaseInt);
+                        PurchaseSugar(store, player, sugar, amountToPurchase, amountToPurchaseInt);
                         break;
                     case "cups":
-                        PurchaseCups(store, money, cups, amountToPurchase, amountToPurchaseInt);
+                        PurchaseCups(store, player, cups, amountToPurchase, amountToPurchaseInt);
                         break;
 
                     default:
@@ -236,29 +232,15 @@ namespace LemonadeStand
 
         }
 
-        //public int PurchaseLemons(Store store, double money, Lemons lemons, string amountToPurchase, int amountToPurchaseInt)
-        //{
 
-        //    amountToPurchase = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
-        //    if (amountToPurchase != "0")
-        //    {
-        //        amountToPurchaseInt = Int32.Parse(amountToPurchase);
-              
-        //        SubtractFromWallet(money, store.lemonPrices[amountToPurchaseInt - 1]);
-        //        lemons.currentStock += store.lemonAmount[amountToPurchaseInt - 1];
-        //    }
-        //    return lemons.currentStock;
-        //}
-
-        public void PurchaseLemons(Store store, double money, Lemons lemons, string amountToPurchase, int amountToPurchaseInt)
+        public void PurchaseLemons(Store store, Player player, Lemons lemons, string amountToPurchase, int amountToPurchaseInt)
         {
 
             amountToPurchase = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
             if (amountToPurchase != "0")
             {
                 amountToPurchaseInt = Int32.Parse(amountToPurchase);
-
-                SubtractFromWallet(money, store.lemonPrices[amountToPurchaseInt - 1]);
+                player.WithDrawMoney(store.lemonPrices[amountToPurchaseInt - 1]);
                 AdjustLemonAmount(store, lemons, amountToPurchaseInt, store.lemonAmount[amountToPurchaseInt - 1]);
                 
             }
@@ -278,21 +260,21 @@ namespace LemonadeStand
         }
 
 
-        public void PurchaseIce(Store store, double money, IceCubes iceCubes, string amountToPurchase, int amountToPurchaseInt)
+        public void PurchaseIce(Store store, Player player, IceCubes iceCubes, string amountToPurchase, int amountToPurchaseInt)
         {
 
             amountToPurchase = userInterface.DisplayStoreItem(store.iceCubes, store.iceCubesPrices, store.iceCubesAmount);
             if (amountToPurchase != "0")
             {
                 amountToPurchaseInt = Int32.Parse(amountToPurchase);
-           
-                SubtractFromWallet(money, store.iceCubesPrices[amountToPurchaseInt - 1]);
-              
+                player.WithDrawMoney(store.iceCubesPrices[amountToPurchaseInt - 1]);
                 AdjustIceCubesAmount(store, iceCubes, amountToPurchaseInt, store.iceCubesAmount[amountToPurchaseInt - 1]);
             }
               
             
         }
+
+
 
 
         public int AdjustSugarAmount(Store store,Sugar sugar, int amountToPurchaseInt, int itemsToAdd)
@@ -301,27 +283,19 @@ namespace LemonadeStand
             return sugar.currentStock;
         }
 
-        public void PurchaseSugar(Store store, double money, Sugar sugar, string amountToPurchase, int amountToPurchaseInt)
+        public void PurchaseSugar(Store store, Player player, Sugar sugar, string amountToPurchase, int amountToPurchaseInt)
         {
-            
-            
                 amountToPurchase = userInterface.DisplayStoreItem(store.cupsSugar, store.cupsSugarPrices, store.cupsSugarAmount);
-            if (amountToPurchase != "0") { 
+            if (amountToPurchase != "0")
+            { 
                 amountToPurchaseInt = Int32.Parse(amountToPurchase);
-                SubtractFromWallet(money, store.cupsSugarPrices[amountToPurchaseInt - 1]);
+                player.WithDrawMoney(store.cupsSugarPrices[amountToPurchaseInt - 1]);          
                 AdjustSugarAmount(store, sugar, amountToPurchaseInt, store.cupsSugarAmount[amountToPurchaseInt - 1]);
-             
-                
             }
-         
         }
 
 
-        public double SubtractFromWallet(double money, double price)
-        {
-            money = money - price;
-            return money;
-        }
+
 
         public int AdjustCupsAmount(Store store, Cups cups, int amountToPurchaseInt, int itemsToAdd)
         {
@@ -330,36 +304,41 @@ namespace LemonadeStand
         }
 
 
-        public void PurchaseCups(Store store, double money, Cups cups, string amountToPurchase, int amountToPurchaseInt)
+        public void PurchaseCups(Store store, Player player, Cups cups, string amountToPurchase, int amountToPurchaseInt)
         {
             amountToPurchase = userInterface.DisplayStoreItem(store.paperCups, store.paperCupsPrices, store.paperCupsAmount);
             if (amountToPurchase != "0")
             {
                 amountToPurchaseInt = Int32.Parse(amountToPurchase);
-                SubtractFromWallet(money, store.paperCupsPrices[amountToPurchaseInt - 1]);
-                AdjustCupsAmount(store, cups, amountToPurchaseInt, store.paperCupsAmount[amountToPurchaseInt - 1])
+                player.WithDrawMoney(store.paperCupsPrices[amountToPurchaseInt - 1]);
+                AdjustCupsAmount(store, cups, amountToPurchaseInt, store.paperCupsAmount[amountToPurchaseInt - 1]);
               
               
             }
             
         }
 
-
+        public void AddProfit(Player player)
+        {
+            player.DepositMoney(cupsSold * pricePerCup);
+        }
 
         public void RunDay(Store store, Player player, int dayNumber, Lemons lemons, IceCubes iceCubes, Sugar sugar, Cups cups)
         {
             weather.DetermineForecast();
-            userInterface.DisplayBeginningOfDayInfo(weather.forecast, weather.highTemperatureForecast, dayNumber, player.money);
+            userInterface.DisplayBeginningOfDayInfo(weather.forecast, weather.highTemperatureForecast, dayNumber, player.Money);
             userInterface.ShowRecipe(lemonsPerPitcher, cupsSugarPerPitcher, iceCubesPerGlass, pricePerCup);
             ChangeRecipe(); 
             userInterface.ShowRecipe(lemonsPerPitcher, cupsSugarPerPitcher, iceCubesPerGlass, pricePerCup);
-            PurchaseFromStore(store, player.money, lemons, iceCubes, sugar, cups);
+            PurchaseFromStore(store, player, lemons, iceCubes, sugar, cups);
             userInterface.DisplayInventory(cups.currentStock, lemons.currentStock, sugar.currentStock, iceCubes.currentStock);
-            DeterminePotentialCustomers();
             DetermineGlassesPerPitcher();
+            DeterminePotentialCustomers();
+            DetermineCupsSold();
+            AddProfit(player);
             DecreaseInventory(lemons.currentStock, iceCubes.currentStock, sugar.currentStock, cups.currentStock);
             GetPopularity();
-            userInterface.DisplayEndOfDayInfo(CheckForSoldOut(iceCubes.currentStock, lemons.currentStock, sugar.currentStock, cups.currentStock), weather.forecast, weather.highTemperatureForecast, dayNumber, player.money, cupsSold, popularity);
+            userInterface.DisplayEndOfDayInfo(CheckForSoldOut(iceCubes.currentStock, lemons.currentStock, sugar.currentStock, cups.currentStock), weather.forecast, weather.highTemperatureForecast, dayNumber, player.Money, cupsSold, popularity);
 
 
 

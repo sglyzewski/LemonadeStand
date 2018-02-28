@@ -12,7 +12,7 @@ namespace LemonadeStand
         public List<string> weatherOptions;
         public List<int> temperatureOptions;
         public string forecast;
-
+        public int weatherFactorNumber;
         public int highTemperatureForecast;
         public Random random;
     //constructor
@@ -48,6 +48,37 @@ namespace LemonadeStand
             highTemperatureForecast = DetermineTemperatureForecast();
         }
 
-        
-}
+        public int GetWeatherFactorNumber()
+        {
+
+            if (highTemperatureForecast == 92 && forecast != "rain")
+            {
+              weatherFactorNumber = 2;
+                return weatherFactorNumber;
+            }
+            else if ((highTemperatureForecast == 85 || highTemperatureForecast == 75) && forecast != "rain")
+            {
+                 weatherFactorNumber = 3;
+                return weatherFactorNumber;
+            }
+            else if ((highTemperatureForecast == 67 || highTemperatureForecast == 53) && forecast != "rain")
+            {
+                weatherFactorNumber = 4;
+                return weatherFactorNumber;
+            }
+           else  if ((highTemperatureForecast == 92 || highTemperatureForecast == 85))
+            {
+                weatherFactorNumber = 5;
+                return weatherFactorNumber;
+            }
+            else
+            {
+                weatherFactorNumber = 6;
+                return weatherFactorNumber;
+            }
+
+        }
+
+
+    }
 }
