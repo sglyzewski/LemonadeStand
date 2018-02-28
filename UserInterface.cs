@@ -184,7 +184,7 @@ namespace LemonadeStand
             }
             {
                 
-                GiveMessage("Day " + dayNumber + " Report:");
+                GiveMessage("End of Day " + dayNumber + " Report:");
                 GiveMessage("Weather: " + forecast);
                 GiveMessage("High Temp: " + temperatureForecast);
 

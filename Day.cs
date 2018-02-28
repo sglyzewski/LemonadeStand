@@ -205,7 +205,6 @@ namespace LemonadeStand
         public void PurchaseFromStore(Store store, double money, Lemons lemons, IceCubes iceCubes, Sugar sugar, Cups cups)
         {
             string input = "";
-
             string amountToPurchase = "";
             int amountToPurchaseInt = 0;
             while (input.ToLower() != "exit")
@@ -214,7 +213,6 @@ namespace LemonadeStand
                 switch (input.ToLower())
                 {
                     case "lemons":
-
                         PurchaseLemons(store, money, lemons, amountToPurchase, amountToPurchaseInt);
                         break;
 
@@ -234,50 +232,116 @@ namespace LemonadeStand
 
                 }
 
-
-
-
             }
-
-
-
 
         }
 
-        public int PurchaseLemons(Store store, double money, Lemons lemons, string amountToPurchase, int amountToPurchaseInt)
+        //public int PurchaseLemons(Store store, double money, Lemons lemons, string amountToPurchase, int amountToPurchaseInt)
+        //{
+
+        //    amountToPurchase = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
+        //    if (amountToPurchase != "0")
+        //    {
+        //        amountToPurchaseInt = Int32.Parse(amountToPurchase);
+              
+        //        SubtractFromWallet(money, store.lemonPrices[amountToPurchaseInt - 1]);
+        //        lemons.currentStock += store.lemonAmount[amountToPurchaseInt - 1];
+        //    }
+        //    return lemons.currentStock;
+        //}
+
+        public void PurchaseLemons(Store store, double money, Lemons lemons, string amountToPurchase, int amountToPurchaseInt)
         {
+
             amountToPurchase = userInterface.DisplayStoreItem(store.lemons, store.lemonPrices, store.lemonAmount);
-            amountToPurchaseInt = Int32.Parse(amountToPurchase);
-            money = money - store.lemonPrices[amountToPurchaseInt - 1];
-            lemons.currentStock += store.lemonAmount[amountToPurchaseInt - 1];
+            if (amountToPurchase != "0")
+            {
+                amountToPurchaseInt = Int32.Parse(amountToPurchase);
+
+                SubtractFromWallet(money, store.lemonPrices[amountToPurchaseInt - 1]);
+                AdjustLemonAmount(store, lemons, amountToPurchaseInt, store.lemonAmount[amountToPurchaseInt - 1]);
+                
+            }
+           
+        }
+
+        public int AdjustLemonAmount(Store store, Lemons lemons, int amountToPurchaseInt, int itemsToAdd)
+        {
+            lemons.currentStock += itemsToAdd;
             return lemons.currentStock;
         }
 
-        public int PurchaseIce(Store store, double money, IceCubes iceCubes, string amountToPurchase, int amountToPurchaseInt)
+        public int AdjustIceCubesAmount(Store store, IceCubes iceCubes, int amountToPurchaseInt, int itemsToAdd)
         {
-            amountToPurchase = userInterface.DisplayStoreItem(store.iceCubes, store.iceCubesPrices, store.iceCubesAmount);
-            amountToPurchaseInt = Int32.Parse(amountToPurchase);
-            money = money - store.iceCubesPrices[amountToPurchaseInt - 1];
-            iceCubes.currentStock += store.iceCubesAmount[amountToPurchaseInt - 1];
+            iceCubes.currentStock += itemsToAdd;
             return iceCubes.currentStock;
         }
 
-        public int PurchaseSugar(Store store, double money, Sugar sugar, string amountToPurchase, int amountToPurchaseInt)
+
+        public void PurchaseIce(Store store, double money, IceCubes iceCubes, string amountToPurchase, int amountToPurchaseInt)
         {
-            amountToPurchase = userInterface.DisplayStoreItem(store.cupsSugar, store.cupsSugarPrices, store.cupsSugarAmount);
-            amountToPurchaseInt = Int32.Parse(amountToPurchase);
-            money = money - store.cupsSugarPrices[amountToPurchaseInt - 1];
-            sugar.currentStock += store.cupsSugarAmount[amountToPurchaseInt - 1];
+
+            amountToPurchase = userInterface.DisplayStoreItem(store.iceCubes, store.iceCubesPrices, store.iceCubesAmount);
+            if (amountToPurchase != "0")
+            {
+                amountToPurchaseInt = Int32.Parse(amountToPurchase);
+           
+                SubtractFromWallet(money, store.iceCubesPrices[amountToPurchaseInt - 1]);
+              
+                AdjustIceCubesAmount(store, iceCubes, amountToPurchaseInt, store.iceCubesAmount[amountToPurchaseInt - 1]);
+            }
+              
+            
+        }
+
+
+        public int AdjustSugarAmount(Store store,Sugar sugar, int amountToPurchaseInt, int itemsToAdd)
+        {
+            sugar.currentStock += itemsToAdd;
             return sugar.currentStock;
         }
 
-        public int PurchaseCups(Store store, double money, Cups cups, string amountToPurchase, int amountToPurchaseInt)
+        public void PurchaseSugar(Store store, double money, Sugar sugar, string amountToPurchase, int amountToPurchaseInt)
+        {
+            
+            
+                amountToPurchase = userInterface.DisplayStoreItem(store.cupsSugar, store.cupsSugarPrices, store.cupsSugarAmount);
+            if (amountToPurchase != "0") { 
+                amountToPurchaseInt = Int32.Parse(amountToPurchase);
+                SubtractFromWallet(money, store.cupsSugarPrices[amountToPurchaseInt - 1]);
+                AdjustSugarAmount(store, sugar, amountToPurchaseInt, store.cupsSugarAmount[amountToPurchaseInt - 1]);
+             
+                
+            }
+         
+        }
+
+
+        public double SubtractFromWallet(double money, double price)
+        {
+            money = money - price;
+            return money;
+        }
+
+        public int AdjustCupsAmount(Store store, Cups cups, int amountToPurchaseInt, int itemsToAdd)
+        {
+            cups.currentStock += itemsToAdd;
+            return cups.currentStock;
+        }
+
+
+        public void PurchaseCups(Store store, double money, Cups cups, string amountToPurchase, int amountToPurchaseInt)
         {
             amountToPurchase = userInterface.DisplayStoreItem(store.paperCups, store.paperCupsPrices, store.paperCupsAmount);
-            amountToPurchaseInt = Int32.Parse(amountToPurchase);
-            money = money - store.paperCupsPrices[amountToPurchaseInt - 1];
-            cups.currentStock += store.paperCupsAmount[amountToPurchaseInt - 1];
-            return cups.currentStock;
+            if (amountToPurchase != "0")
+            {
+                amountToPurchaseInt = Int32.Parse(amountToPurchase);
+                SubtractFromWallet(money, store.paperCupsPrices[amountToPurchaseInt - 1]);
+                AdjustCupsAmount(store, cups, amountToPurchaseInt, store.paperCupsAmount[amountToPurchaseInt - 1])
+              
+              
+            }
+            
         }
 
 
