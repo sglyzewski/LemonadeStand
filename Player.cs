@@ -10,9 +10,9 @@ namespace LemonadeStand
     {
         //member variables
         double profit;
-        double expenses;
-        double income;
-        double liquidatedInventoryValue; //total worth of a company's physical assets when it goes out of business; determined by assets i.e. inventory
+        //double expenses;
+        //double income;
+        //double liquidatedInventoryValue; //total worth of a company's physical assets when it goes out of business; determined by assets i.e. inventory
         double money;
         public string name;
 
@@ -34,6 +34,11 @@ namespace LemonadeStand
             return false;
         }
 
+        public void FindProfit(double moneyInWalletAtStart)
+        {
+            profit = money - moneyInWalletAtStart;
+          
+        }
         public void DepositMoney(double amount)
         {
            
@@ -47,6 +52,16 @@ namespace LemonadeStand
                 return money;
             }
         }
+
+        public double Profit
+        {
+            get
+            {
+                return profit;
+            }
+        }
+
+        
 
 
         //member methods

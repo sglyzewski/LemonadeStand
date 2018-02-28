@@ -18,6 +18,7 @@ namespace LemonadeStand
         public int cupsSold;
         public int potentialCustomers;
         public double popularity;
+        public double moneyInWalletAtStart;
         int pitcherLooper;
         Random random;
         Weather weather;
@@ -34,7 +35,8 @@ namespace LemonadeStand
             pricePerCup = 0.25;
             cupsSold = 0;
             random = new Random();
-         
+            
+
             weather = new Weather();
           
             userInterface = new UserInterface();
@@ -70,22 +72,22 @@ namespace LemonadeStand
             }
         }
 
-        public void DecreaseInventory(int cupsCurrentStock, int iceCubesCurrentStock, int lemonsCurrentStock, int sugarCurrentStock)
-        {
+        //public void DecreaseInventory(int cupsCurrentStock, int iceCubesCurrentStock, int lemonsCurrentStock, int sugarCurrentStock)
+        //{
 
-            for (int i = 1; i <= cupsSold || (CheckForSoldOut(cupsCurrentStock, iceCubesCurrentStock, lemonsCurrentStock, sugarCurrentStock) == true); i++)
-            {
-                cupsCurrentStock --;
-                iceCubesCurrentStock = iceCubesCurrentStock - iceCubesPerGlass;
-                if (i % pitcherLooper ==0)
-                {
-                    lemonsCurrentStock = lemonsCurrentStock - lemonsPerPitcher;
-                    sugarCurrentStock = sugarCurrentStock - cupsSugarPerPitcher;
-                }
-            }
+        //    for (int i = 1; i <= cupsSold; i++)
+        //    {
+        //        cupsCurrentStock --;
+        //        iceCubesCurrentStock = iceCubesCurrentStock - iceCubesPerGlass;
+        //        if (i % pitcherLooper ==0)
+        //        {
+        //            lemonsCurrentStock = lemonsCurrentStock - lemonsPerPitcher;
+        //            sugarCurrentStock = sugarCurrentStock - cupsSugarPerPitcher;
+        //        }
+        //    }
 
 
-        }
+        //}
 
         
         public bool CheckForSoldOut(int iceCubesCurrentStock, int lemonsCurrentStock, int sugarCurrentStock, int cupsCurrentStock)
@@ -115,8 +117,9 @@ namespace LemonadeStand
         {
             for (int i = 0; i < potentialCustomers; i++)
             {
-                Customer customer = new Customer();
-                customer.Purchase(cupsSold, weather);
+                Customer customer;
+                customer = new Customer();
+                cupsSold += customer.Purchase(weather);
             }
         }
 
@@ -325,6 +328,8 @@ namespace LemonadeStand
 
         public void RunDay(Store store, Player player, int dayNumber, Lemons lemons, IceCubes iceCubes, Sugar sugar, Cups cups)
         {
+            moneyInWalletAtStart = player.Money;
+
             weather.DetermineForecast();
             userInterface.DisplayBeginningOfDayInfo(weather.forecast, weather.highTemperatureForecast, dayNumber, player.Money);
             userInterface.ShowRecipe(lemonsPerPitcher, cupsSugarPerPitcher, iceCubesPerGlass, pricePerCup);
@@ -336,9 +341,14 @@ namespace LemonadeStand
             DeterminePotentialCustomers();
             DetermineCupsSold();
             AddProfit(player);
-            DecreaseInventory(lemons.currentStock, iceCubes.currentStock, sugar.currentStock, cups.currentStock);
+            player.FindProfit(moneyInWalletAtStart);
+            lemons.DecreaseInventory(cupsSold, pitcherLooper, lemonsPerPitcher);
+            sugar.DecreaseInventory(cupsSold, pitcherLooper, cupsSugarPerPitcher);
+            cups.DecreaseInventory(cupsSold);
+            iceCubes.DecreaseInventory(cupsSold, iceCubesPerGlass);
+            
             GetPopularity();
-            userInterface.DisplayEndOfDayInfo(CheckForSoldOut(iceCubes.currentStock, lemons.currentStock, sugar.currentStock, cups.currentStock), weather.forecast, weather.highTemperatureForecast, dayNumber, player.Money, cupsSold, popularity);
+            userInterface.DisplayEndOfDayInfo(CheckForSoldOut(iceCubes.currentStock, lemons.currentStock, sugar.currentStock, cups.currentStock), weather.forecast, weather.highTemperatureForecast, dayNumber, player.Money, player.Profit, cupsSold, popularity);
 
 
 

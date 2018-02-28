@@ -19,5 +19,19 @@ namespace LemonadeStand
         {
             return true;
         }
+
+        public void DecreaseInventory(int cupsSold)
+        {
+
+            for (int i = 1; i <= cupsSold; i++)
+            {
+                currentStock--;
+            }
+
+
+
+
+        }
     }
+
 }

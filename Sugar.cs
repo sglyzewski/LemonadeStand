@@ -22,5 +22,17 @@ namespace LemonadeStand
 
 
         }
+
+        public void DecreaseInventory(int cupsSold, int pitcherLooper, int cupsSugarPerPitcher)
+        {
+            for (int i = 1; i <= cupsSold; i++)
+            {
+                if (i % pitcherLooper == 0)
+                {
+                    currentStock = currentStock - cupsSugarPerPitcher;
+                }
+            }
+
+        }
     }
 }

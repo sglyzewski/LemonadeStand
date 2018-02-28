@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class IceCubes: Inventory
+    class IceCubes : Inventory
     {
 
         //member variables
@@ -14,12 +14,12 @@ namespace LemonadeStand
         public IceCubes()
         {
             currentStock = 0;
-           
+
         }
         //member methods
         public override bool Spoiler(int spoilNumber)
         {
-        
+
             return true;
         }
 
@@ -33,5 +33,14 @@ namespace LemonadeStand
                 return ("");
         }
 
+        public void DecreaseInventory(int cupsSold, int iceCubesPerGlass)
+        {
+            for (int i = 1; i <= cupsSold; i++)
+            {
+                currentStock = currentStock - iceCubesPerGlass;
+            }
+
+        }
     }
 }
+

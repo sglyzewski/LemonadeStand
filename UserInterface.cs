@@ -175,7 +175,7 @@ namespace LemonadeStand
             GiveMessage("Money: $" + money + "\n\n\n");
         }
 
-        public void DisplayEndOfDayInfo(bool soldOut, string forecast, int temperatureForecast, int dayNumber, double money, int cupsSold, double popularity)
+        public void DisplayEndOfDayInfo(bool soldOut, string forecast, int temperatureForecast, int dayNumber, double money, double profit, int cupsSold, double popularity)
         {
             double percentageMaker = 100;
             if (soldOut == true)
@@ -189,7 +189,8 @@ namespace LemonadeStand
                 GiveMessage("High Temp: " + temperatureForecast);
 
                 GiveMessage("Money: $" + money );
-                GiveMessage("Popularity " + (popularity * percentageMaker));
+                GiveMessage("Popularity: " + (popularity * percentageMaker)+ "%");
+                GiveMessage("Profit: " + profit);
                 GiveMessage("Cups Sold: " + cupsSold + "\n\n\n");
             }
 

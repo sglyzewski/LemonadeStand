@@ -42,6 +42,8 @@ namespace LemonadeStand
         {
             userInterface.GiveMessage("End of Season Report:");
             userInterface.GiveMessage("Money: " + player.Money);
+            player.FindProfit(20.00);
+            userInterface.GiveMessage("Total Profit: " + player.Profit);
         }
 
 
